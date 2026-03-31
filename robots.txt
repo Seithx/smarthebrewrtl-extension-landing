@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://seithx.github.io/smarthebrewrtl-extension-landing/sitemap.xml
