@@ -5,16 +5,21 @@ on:
     - cron: '0 8 * * 1'  # Every Monday at 8:00 UTC
   workflow_dispatch:  # Allow manual trigger
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   check-selectors:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
     steps:
       - uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
       - name: Install Playwright
         run: |
@@ -26,6 +31,20 @@ jobs:
         id: check
         run: node check-selectors.js
 
+      - name: Create GitHub issue on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const today = new Date().toISOString().split('T')[0];
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `[Automated] Selector check failed - ${today}`,
+              body: `The weekly selector health check detected missing selectors on one or more supported sites.\n\nThis means the extension's RTL functionality may be broken for affected platforms.\n\n**Action needed:** Run the CDP diagnostic tool to investigate and update selectors.\n\`\`\`bash\npy tools/cdp-stream-diag.py --url https://affected-site.com\n\`\`\`\n\n[View workflow run](https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})`,
+              labels: ['automated', 'selector-check']
+            });
+
       - name: Send email on failure
         if: failure()
         uses: dawidd6/action-send-mail@v3
@@ -35,14 +54,20 @@ jobs:
           secure: true
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: "[Smart Hebrew RTL] Selector check FAILED"
+          subject: "[Smart Hebrew RTL] Selector check FAILED - selectors may need update"
           to: asaflecht@gmail.com
           from: Smart Hebrew RTL Bot
           body: |
+            The weekly selector health check FAILED.
+
             One or more supported sites have changed their DOM structure.
-            Selectors that the extension relies on may be broken.
+            The extension's RTL functionality may be broken.
 
-            Check the workflow run for details:
-            https://github.com/Seithx/smarthebrewrtl-extension-landing/actions
+            Action needed:
+            1. Check the workflow run: https://github.com/Seithx/smarthebrewrtl-extension-landing/actions
+            2. Run the CDP diagnostic: py tools/cdp-stream-diag.py --url https://affected-site.com
+            3. Update selectors in content.js
+            4. A GitHub issue has been created automatically
 
-            Sites checked: ChatGPT, Claude, AI Studio, Gemini, NotebookLM
+            Sites that can be checked: Google AI Studio, Gemini
+            Sites skipped (Cloudflare/login): ChatGPT, Claude, NotebookLM
