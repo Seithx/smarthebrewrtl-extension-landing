@@ -1,0 +1,48 @@
+name: Selector Health Check
+
+on:
+  schedule:
+    - cron: '0 8 * * 1'  # Every Monday at 8:00 UTC
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  check-selectors:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Playwright
+        run: |
+          npm init -y
+          npm install playwright
+          npx playwright install chromium
+
+      - name: Run selector check
+        id: check
+        run: node check-selectors.js
+
+      - name: Send email on failure
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "[Smart Hebrew RTL] Selector check FAILED"
+          to: asaflecht@gmail.com
+          from: Smart Hebrew RTL Bot
+          body: |
+            One or more supported sites have changed their DOM structure.
+            Selectors that the extension relies on may be broken.
+
+            Check the workflow run for details:
+            https://github.com/Seithx/smarthebrewrtl-extension-landing/actions
+
+            Sites checked: ChatGPT, Claude, AI Studio, Gemini, NotebookLM
