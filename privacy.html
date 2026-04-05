@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Smart Hebrew RTL</title>
+    <link rel="canonical" href="https://seithx.github.io/smarthebrewrtl-extension-landing/privacy.html">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            max-width: 720px;
+            margin: 40px auto;
+            padding: 0 20px;
+            line-height: 1.7;
+            color: #1F2937;
+            background: #F8FAFC;
+        }
+        h1 { color: #0D1117; border-bottom: 2px solid #0066FF; padding-bottom: 8px; }
+        h2 { color: #1F2937; margin-top: 32px; }
+        h3 { color: #374151; }
+        ul { padding-left: 24px; }
+        li { margin-bottom: 4px; }
+        code { background: #E5E7EB; padding: 2px 6px; border-radius: 4px; font-size: 14px; }
+        a { color: #0066FF; }
+        .updated { color: #6B7280; font-size: 14px; }
+        .summary { background: #EEF2FF; border: 1px solid #C7D2FE; border-radius: 8px; padding: 16px; margin-top: 32px; }
+        .footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #E5E7EB; font-size: 13px; color: #6B7280; }
+    </style>
+</head>
+<body>
+    <h1>Privacy Policy</h1>
+    <p><strong>Smart Hebrew RTL - UI-Safe Text Direction</strong></p>
+    <p class="updated">Last Updated: April 4, 2026</p>
+
+    <h2>Overview</h2>
+    <p>Smart Hebrew RTL ("the Extension") is committed to protecting your privacy. This privacy policy explains how the Extension handles your data.</p>
+
+    <h2>Data Collection</h2>
+    <p><strong>The Extension does NOT collect, store, transmit, or share any personal data.</strong></p>
+    <ul>
+        <li>No user tracking</li>
+        <li>No analytics</li>
+        <li>No cookies</li>
+        <li>No external servers contacted</li>
+        <li>No personal information collected</li>
+        <li>No browsing history recorded</li>
+        <li>No data sent to third parties</li>
+    </ul>
+
+    <h2>Local Storage</h2>
+    <p>The Extension uses Chrome's storage API (<code>chrome.storage.sync</code>) to save your preferences:</p>
+    <ul>
+        <li><strong>Per-site enable/disable settings</strong>: Stores only the hostname and a boolean (true/false) indicating whether the extension is enabled for that site</li>
+        <li><strong>Example</strong>: <code>{"claude.ai": true}</code></li>
+    </ul>
+    <p>This data stays on your device, syncs across your Chrome browsers if signed in, and contains no personal information. It can be cleared by uninstalling the extension.</p>
+
+    <h2>Permissions Explained</h2>
+    <h3>Required Permissions:</h3>
+    <ul>
+        <li><strong><code>tabs</code></strong>: To detect which website you're visiting and apply per-site settings</li>
+        <li><strong><code>storage</code></strong>: To save your per-site preferences locally</li>
+        <li><strong><code>activeTab</code></strong>: To work on the currently active browser tab</li>
+    </ul>
+    <h3>Host Permissions:</h3>
+    <p>Content scripts are injected only on specific supported sites: ChatGPT, Claude.ai, Gemini, AI Studio, NotebookLM, Copilot, Perplexity, Monday.com, Base44, and Lovable.dev.</p>
+    <p><strong>Note:</strong> The warning "Read and change data on all websites" is required for the extension to modify the text direction CSS on the pages you visit. It does not mean we are reading your messages.</p>
+
+    <h2>What the Extension Does</h2>
+    <ol>
+        <li><strong>Detects Hebrew content</strong>: Analyzes text on web pages to identify Hebrew characters (30%+ density threshold)</li>
+        <li><strong>Applies RTL direction</strong>: Sets <code>dir="rtl"</code> only on elements containing Hebrew text</li>
+        <li><strong>Preserves UI layouts</strong>: Never modifies navigation, toolbars, or application interfaces</li>
+        <li><strong>Keyboard shortcuts</strong>: Ctrl+Shift direction switching for manual RTL/LTR control</li>
+    </ol>
+
+    <h2>Third-Party Services</h2>
+    <p>The Extension does NOT use any third-party services, analytics, or tracking tools.</p>
+
+    <h2>Data Security</h2>
+    <p>Since no data is collected or transmitted, there are no security risks related to data breaches. Your browsing activity remains completely private.</p>
+
+    <h2>Changes to Website Content</h2>
+    <p>The Extension modifies the display of web pages locally in your browser by adding <code>dir="rtl"</code> attributes and inline CSS styles. These changes happen only in your browser, are never saved permanently, and do not affect the actual website or other users.</p>
+
+    <h2>Children's Privacy</h2>
+    <p>The Extension does not knowingly collect data from anyone, including children under 13.</p>
+
+    <h2>Your Rights</h2>
+    <ul>
+        <li>Disable the Extension at any time through Chrome's extension settings</li>
+        <li>Remove all stored preferences by uninstalling the Extension</li>
+    </ul>
+
+    <h2>Compliance</h2>
+    <p>This Extension complies with Chrome Web Store Developer Program Policies, GDPR principles, and CCPA principles.</p>
+
+    <h2>Contact</h2>
+    <p>
+        <strong>Developer:</strong> Asaf Lecht / <span dir="rtl" lang="he">&#x05D0;&#x05E1;&#x05E3; &#x05DC;&#x05DB;&#x05D8;</span><br>
+        <strong>Email:</strong> <a href="mailto:asaflecht@gmail.com">asaflecht@gmail.com</a><br>
+        <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/asaflecht/">linkedin.com/in/asaflecht</a><br>
+        <strong>GitHub:</strong> <a href="https://github.com/Seithx">github.com/Seithx</a>
+    </p>
+
+    <div class="summary">
+        <strong>Summary:</strong> This Extension is completely private. It stores only your site preferences locally, collects no personal data, and never communicates with external servers.
+    </div>
+
+    <div class="footer">
+        &copy; 2024-2026 Asaf Lecht. All rights reserved. |
+        <a href="https://seithx.github.io/smarthebrewrtl-extension-landing/">Back to homepage</a>
+    </div>
+</body>
+</html>
