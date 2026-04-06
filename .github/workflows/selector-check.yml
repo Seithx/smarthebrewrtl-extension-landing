@@ -1,9 +1,9 @@
 name: Selector Health Check
 
 on:
-  schedule:
-    - cron: '0 8 * * 1'  # Every Monday at 8:00 UTC
-  workflow_dispatch:  # Allow manual trigger
+  # schedule:
+  #   - cron: '0 8 * * 1'  # Disabled: most sites blocked by Cloudflare/login
+  workflow_dispatch:  # Manual trigger only
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
