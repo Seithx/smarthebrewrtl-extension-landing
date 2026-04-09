@@ -882,7 +882,7 @@
         <div class="hero-content">
             <div class="badge">
                 <span class="badge-dot"></span>
-                Version 2.2.1 — Flicker-Free Streaming RTL
+                Version 2.2.3 — Native Keyboard Control + Smart Input RTL
             </div>
             <h1>Fix Hebrew Typing in <span class="gradient-text">AI Chats</span> Instantly</h1>
             <p class="hero-description">
@@ -976,6 +976,16 @@
                 <div class="feature-icon green">📄</div>
                 <h3>Claude Artifacts</h3>
                 <p>Hebrew in Claude's TXT, Markdown, and HTML artifacts renders correctly. Works across both inline and cross-origin iframe artifacts.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon purple">⌨️</div>
+                <h3>Native Keyboard Control</h3>
+                <p>Right Ctrl + Right Shift for RTL, Left Ctrl + Left Shift for LTR. Works exactly like native Windows direction switching -- the only extension that brings this to web chat platforms.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon blue">✏️</div>
+                <h3>Smart Input RTL</h3>
+                <p>Other RTL tools set dir="auto" on textareas which breaks mixed lines. We fix the unicode-bidi bug so "Snapshots יומיים" renders correctly even when starting with English.</p>
             </div>
         </div>
     </section>
